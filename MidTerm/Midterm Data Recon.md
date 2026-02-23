@@ -99,9 +99,8 @@ print(f"Log-likelihood (Normal): {ll_n:.4f}")
 ### Step 3: Fit t-distribution (MLE)
 
 ```python
-res_t = chapter5.fit_general_t(x)
-nu, mu_t, sigma_t = res_t["nu"], res_t["mu"], res_t["sigma"]
-ll_t = res_t["log_likelihood"]
+mu_t, sigma_t, nu = chapter5.fit_general_t(x)
+ll_t = np.sum(stats.t.logpdf(x, df=nu, loc=mu_t, scale=sigma_t))
 print(f"t MLE: nu={nu:.2f}, mu={mu_t:.6f}, sigma={sigma_t:.6f}")
 print(f"Log-likelihood (t): {ll_t:.4f}")
 ```
@@ -773,7 +772,7 @@ for j, name in enumerate(asset_names):
 ```python
 R_dm = eu.demean(R)
 dist_types = ["t", "t", "t", "t", "t"]  # ← 看题目
-marginals = chapter5.fit_copula_marginals(R_dm, dist_types=dist_types)
+u_data, marginals = chapter5.fit_copula_marginals(R_dm, dist_types=dist_types)
 print("Fitted marginals:")
 for m in marginals:
     print(f"  {m}")
@@ -806,7 +805,7 @@ seed = 42      # ← 看题目
 
 sim_R = chapter5.simulate_copula_from_fitted(
     marginals=marginals,
-    copula_corr=cop_corr_sp,
+    corr=cop_corr_sp,
     n_sim=n_sim,
     seed=seed
 )
