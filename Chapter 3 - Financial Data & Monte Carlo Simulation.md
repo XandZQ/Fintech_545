@@ -47,7 +47,7 @@ $$F^{-1}(p) = \text{满足 } P(X \le x) = p \text{ 的那个 } x$$
 
 例子：
 
-- $F^{-1}(0.05)$ = "最差 5% 的 cutoff" → 这就是 95% VaR（Chapter 4）
+- $F^{-1}(0.05)$ = "最差 5% 的 cutoff" → 这就是 95% [[Chapter 4 - Value-at-Risk (VaR)#1. VaR 的定义与直觉|VaR]]
 - $F^{-1}(0.95)$ = "95% 分位数"
 
 ## 2.3 Inverse Transform Sampling（核心 simulation 工具）
@@ -408,7 +408,7 @@ $$\widehat{\text{cov}}_t(x,y) = \sum_{i=1}^{n}w_{t-i}(x_{t-i} - \bar{x})(y_{t-i}
 
 $$\hat{\Sigma}_t = \begin{pmatrix} \hat{\sigma}_{1,t}^2 & \widehat{\text{cov}}_{12,t} & \cdots \\ \widehat{\text{cov}}_{21,t} & \hat{\sigma}_{2,t}^2 & \cdots \\ \vdots & \vdots & \ddots \end{pmatrix}$$
 
-这个矩阵可以直接用于 Cholesky → simulation → VaR/ES。
+这个矩阵可以直接用于 Cholesky → simulation → [[Chapter 4 - Value-at-Risk (VaR)|VaR]]/[[Chapter 5 - Advanced VaR & Expected Shortfall|ES]]。
 
 ---
 
@@ -428,7 +428,7 @@ $$\omega = 0, \quad \alpha = 1-\lambda, \quad \beta = \lambda$$
 
 当 $\alpha + \beta = 1$（即 $\omega = 0$）时：
 
-- GARCH 的 **长期方差（unconditional variance）** 为：
+- [[Chapter 2 - Multivariate and Regression#9.3 Unconditional Variance 推导|GARCH]] 的 **长期方差（unconditional variance）** 为：
 
 $$\bar{\sigma}^2 = \frac{\omega}{1 - \alpha - \beta}$$
 
@@ -682,7 +682,7 @@ $$\text{PctExplained}(K) = \frac{\sum_{i=1}^{K}\lambda_{(i)}}{\sum_{j=1}^{n}\lam
 
 # 14. 与前后章节的联系
 
-- **Chapter 1**：CDF, Quantile function → Inverse transform sampling 的基础
-- **Chapter 2**：Covariance matrix, multivariate normal → 本章的 simulation 对象；GARCH → RiskMetrics 是其特殊情况
-- **Chapter 4**：Monte Carlo 是 VaR 三大计算方法之一；Exponentially weighted $\hat{\Sigma}$ → 用于 parametric VaR
-- **Chapter 5**：Cholesky 和 PCA → Copula simulation 的核心引擎；Model-based simulation → 从拟合模型中做 Monte Carlo
+- **[[Chapter 1 - Foundations Rebuild|Chapter 1]]**：[[Chapter 1 - Foundations Rebuild#2. PDF 与 CDF — 描述分布的两种视角|CDF]]、[[Chapter 1 - Foundations Rebuild#3. Quantile Function（分位数 = Inverse CDF）|Quantile function]] → 本章 Inverse Transform Sampling 的基础
+- **[[Chapter 2 - Multivariate and Regression|Chapter 2]]**：[[Chapter 2 - Multivariate and Regression#3. Covariance Matrix — Portfolio Risk 的核心|Covariance matrix]]、[[Chapter 2 - Multivariate and Regression#4. Multivariate Normal Distribution|MVN]] → 本章 simulation 对象；[[Chapter 2 - Multivariate and Regression#9. GARCH — Volatility 也有 Memory|GARCH]] → RiskMetrics 是其特殊情况
+- **[[Chapter 4 - Value-at-Risk (VaR)|Chapter 4]]**：[[Chapter 4 - Value-at-Risk (VaR)#3.3 Monte Carlo Simulation|Monte Carlo]] 是 VaR 三大计算方法之一；EW $\hat{\Sigma}$ → 用于 [[Chapter 4 - Value-at-Risk (VaR)#3.1 Parametric (Variance-Covariance) Method|parametric VaR]]
+- **[[Chapter 5 - Advanced VaR & Expected Shortfall|Chapter 5]]**：Cholesky 和 PCA → [[Chapter 5 - Advanced VaR & Expected Shortfall#5. Simulating from the Gaussian Copula（完整流程）|Copula simulation]] 的核心引擎；[[Chapter 5 - Advanced VaR & Expected Shortfall#2. Model-Based Simulation（从拟合模型中做 Monte Carlo）|Model-based simulation]] → 从拟合模型中做 Monte Carlo

@@ -64,7 +64,7 @@ $$F(x) = P(X \le x) = \int_{-\infty}^{x} f(t)\,dt$$
 ### 在 Risk 中的核心作用
 
 - $F(-5\%) = P(X \le -5\%)$ → "损失超过 5% 的概率"
-- CDF 的 tail behavior 直接决定了 VaR、ES 等 risk metrics
+- CDF 的 tail behavior 直接决定了 [[Chapter 4 - Value-at-Risk (VaR)|VaR]]、[[Chapter 5 - Advanced VaR & Expected Shortfall|ES]] 等 risk metrics
 
 > **如果只记一个函数，记 CDF。**
 
@@ -86,14 +86,14 @@ $$F^{-1}(p) = \inf\{x : F(x) \ge p\}$$
 
 ## 3.2 Finance 意义
 
-- $F^{-1}(0.05)$ = "最差 5% 的分界线" → 这就是 **95% VaR**（Chapter 4 详细讲）
+- $F^{-1}(0.05)$ = "最差 5% 的分界线" → 这就是 **95% VaR**（详见 [[Chapter 4 - Value-at-Risk (VaR)#1. VaR 的定义与直觉]]）
 - $F^{-1}(0.95)$ = "95% 分位数"
 - Confidence intervals、stress thresholds 都是 quantiles
 
 ## 3.3 重要性质
 
 - $F^{-1}(F(x)) = x$（CDF 和 quantile 互为逆函数）
-- 这是 **Inverse Transform Sampling** 的基础（Chapter 3）：
+- 这是 **Inverse Transform Sampling** 的基础（详见 [[Chapter 3 - Financial Data & Monte Carlo Simulation#2.3 Inverse Transform Sampling（核心 simulation 工具）]]）：
   - $U \sim \text{Uniform}(0,1) \Rightarrow F^{-1}(U) \sim F$
 
 ---
@@ -114,7 +114,7 @@ $$\sigma^2 = E[(X - \mu)^2] = \int_{-\infty}^{\infty} (x - \mu)^2 f(x)\,dx$$
 
 $$\sigma = \sqrt{\sigma^2} \quad \text{(standard deviation，标准差)}$$
 
-> "Outcomes 围绕 mean 的离散程度"。Finance 中 $\sigma$ = **volatility**。
+> "Outcomes 围绕 mean 的离散程度"。Finance 中 $\sigma$ = **volatility**。在 portfolio 层面，variance 由 [[Chapter 2 - Multivariate and Regression#3.2 Portfolio Variance — 最重要的公式|covariance matrix]] 决定。
 
 注意：Variance 对上行和下行 **一视同仁** — 这是建模简化，不是现实。
 
@@ -236,12 +236,12 @@ $$P(X \le x) = \Phi\!\left(\frac{x - \mu}{\sigma}\right)$$
 2. **Excess Kurtosis = 0**（baseline for "thin tails"）
 3. **线性组合仍是 Normal**：$aX + bY \sim \mathcal{N}(a\mu_X + b\mu_Y, \; a^2\sigma_X^2 + b^2\sigma_Y^2 + 2ab\text{Cov}(X,Y))$
 4. **完全由 $\mu$ 和 $\sigma$ 决定**：知道这两个就知道一切
-5. **Uncorrelated ⟹ Independent**（仅在 Normal 下成立！）
+5. **Uncorrelated ⟹ Independent**（仅在 Normal 下成立！一般分布中不成立，详见 [[Chapter 2 - Multivariate and Regression#4.2 关键性质]]）
 
 ### 为什么用 Normal？
 
 - Central Limit Theorem（CLT）：大量独立 rv 的 sum → Normal
-- 数学方便：closed-form VaR, ES, option pricing
+- 数学方便：closed-form [[Chapter 4 - Value-at-Risk (VaR)#2. Normal Distribution 下的 VaR（解析解）|VaR]]、[[Chapter 5 - Advanced VaR & Expected Shortfall#1.2 Normal Distribution 下的 ES（完整推导）|ES]]、option pricing
 - 是所有比较的 **baseline**
 
 ### 为什么 Normal 不够？
@@ -249,7 +249,7 @@ $$P(X \le x) = \Phi\!\left(\frac{x - \mu}{\sigma}\right)$$
 > 金融市场 **violates normality exactly where risk matters**：
 > - Heavy tails（extreme events 比 Normal 预测的更频繁）
 > - Negative skewness
-> - Volatility clustering
+> - [[Chapter 2 - Multivariate and Regression#9. GARCH — Volatility 也有 Memory|Volatility clustering]]
 
 ## 5.4 常用分位数速查
 
@@ -260,7 +260,7 @@ $$P(X \le x) = \Phi\!\left(\frac{x - \mu}{\sigma}\right)$$
 | 1% (α=0.01) | $-2.326$ |
 | 0.5% (α=0.005) | $-2.576$ |
 
-> 这些值在 VaR 计算中反复出现（Chapter 4）。
+> 这些值在 [[Chapter 4 - Value-at-Risk (VaR)#2.1 单资产情况|VaR 计算]] 中反复出现。
 
 ---
 
@@ -353,13 +353,13 @@ $$X = \mu + \sigma \cdot T, \quad T \sim t(\nu)$$
 - $\sigma$：scale（类似 std，但 $\text{Var}(X) = \sigma^2 \cdot \frac{\nu}{\nu-2}$）
 - $\nu$：degrees of freedom（控制 tail thickness）
 
-> Exam 中的 "fit t distribution" 就是用 MLE 同时估计 $\mu, \sigma, \nu$。
+> Exam 中的 "fit t distribution" 就是用 MLE 同时估计 $\mu, \sigma, \nu$。用于 [[Chapter 4 - Value-at-Risk (VaR)#3. VaR 的计算方法（三大方法）|VaR]] 和 [[Chapter 5 - Advanced VaR & Expected Shortfall|ES]] 计算时需要这三个参数。
 
 ## 7.5 为什么 Finance 用 t？
 
 - 金融 returns 几乎总是 heavy-tailed（empirical excess kurtosis > 0）
 - t 分布用一个额外参数 $\nu$ 就能 capture tail heaviness
-- 和 Normal 比较：fit 两者，用 **AICc** 选更好的（Chapter 2 详细讲）
+- 和 Normal 比较：fit 两者，用 **AICc** 选更好的（详见 [[Chapter 2 - Multivariate and Regression#7.4 AIC 与 AICc — 模型选择]]）
 
 ---
 
@@ -403,7 +403,7 @@ $$\hat{\sigma}^2_{\text{MLE}} = \frac{1}{n}\sum_{i=1}^{n}(x_i - \bar{x})^2$$
 
 ## 9.1 Kurtosis Estimator Bias（PDF 第 12 页的例子）
 
-这个例子非常重要，它展示了 **Monte Carlo 思维**：
+这个例子非常重要，它展示了 **Monte Carlo 思维**（[[Chapter 3 - Financial Data & Monte Carlo Simulation#1. 为什么需要 Monte Carlo？|Chapter 3 详细展开]]）：
 
 ### 问题
 

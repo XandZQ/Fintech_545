@@ -1,6 +1,6 @@
 # Chapter 5 — Advanced VaR & Expected Shortfall
 
-> 这一章从 Chapter 4 的基础出发，深入两个方向：(1) **ES 的严格推导与性质**；(2) **打破正态假设** — 引入 Copula 来建模非线性依赖结构。
+> 这一章从 [[Chapter 4 - Value-at-Risk (VaR)|Chapter 4]] 的基础出发，深入两个方向：(1) **ES 的严格推导与性质**；(2) **打破正态假设** — 引入 Copula 来建模非线性依赖结构。
 
 ---
 
@@ -116,7 +116,7 @@ $$\boxed{\text{ES}_\alpha = -\frac{1}{k}\sum_{i=1}^{k} r_{(i)}}$$
 
 ## 2.1 核心思路
 
-在 Chapter 3 中我们学了 Monte Carlo 的底层工具。现在我们把它应用到 **fitted models**：
+在 [[Chapter 3 - Financial Data & Monte Carlo Simulation#1. 为什么需要 Monte Carlo？|Chapter 3]] 中我们学了 Monte Carlo 的底层工具。现在我们把它应用到 **fitted models**：
 
 > 不直接 simulate raw returns，而是 simulate model 的 **residuals**，然后通过 model 重构 returns。
 
@@ -186,7 +186,7 @@ $$\epsilon_t \sim N(0, \Sigma_\epsilon)$$
 
 $$\hat{\Sigma}_\epsilon = \frac{1}{T-1}\sum_{t=1}^{T}\hat{\epsilon}_t\hat{\epsilon}_t'$$
 
-**Step 3**：Cholesky decomposition（在 Chapter 3 中已详细推导）
+**Step 3**：Cholesky decomposition（在 [[Chapter 3 - Financial Data & Monte Carlo Simulation#4. Cholesky Factorization（如何求 $L$）|Chapter 3]] 中已详细推导）
 
 $$\hat{\Sigma}_\epsilon = LL'$$
 
@@ -389,7 +389,7 @@ $$\hat{\Gamma} = \text{Corr}(z_1, z_2, \dots, z_n)$$
 
 ## 4.3 为什么用 Spearman Correlation？
 
-### Pearson vs Spearman 回顾（Chapter 2 的扩展）
+### Pearson vs Spearman 回顾（[[Chapter 2 - Multivariate and Regression#2.2 Spearman (Rank) Correlation|Chapter 2]] 的扩展）
 
 | | Pearson | Spearman |
 |---|---|---|
@@ -461,7 +461,7 @@ $$\rho_S = 1 - \frac{6\sum_{t=1}^T d_t^2}{T(T^2-1)}$$
 
 $$\hat{\Gamma} = LL'$$
 
-（Chapter 3 已详细介绍 Cholesky 算法）
+（[[Chapter 3 - Financial Data & Monte Carlo Simulation#4.2 Cholesky 算法（逐列求解，完整公式）|Chapter 3 已详细介绍 Cholesky 算法]]）
 
 **Step 2：Generate Independent Standard Normals**
 
@@ -584,7 +584,7 @@ $$\text{Simulation: } Z \xrightarrow{L} \tilde{Z} \xrightarrow{\Phi} U \xrightar
 
 # 8. 与前几章的联系
 
-- **Chapter 1**：Quantile function, CDF → VaR 和 ES 的数学基础
-- **Chapter 2**：Covariance matrix, Pearson vs Spearman → Copula fitting 中 Spearman 的选择
-- **Chapter 3**：Cholesky decomposition, Monte Carlo → Copula simulation 的核心引擎
-- **Chapter 4**：VaR 的三种计算方法 → 本章深化为 model-based simulation 和 copula-based simulation；ES 作为 VaR 的补充 → 本章给出完整推导和 coherent risk measure 的理论支撑
+- **[[Chapter 1 - Foundations Rebuild|Chapter 1]]**：[[Chapter 1 - Foundations Rebuild#3. Quantile Function（分位数 = Inverse CDF）|Quantile function]]、[[Chapter 1 - Foundations Rebuild#2. PDF 与 CDF — 描述分布的两种视角|CDF]] → VaR 和 ES 的数学基础；[[Chapter 1 - Foundations Rebuild#7. Student's t Distribution|t 分布]] → marginal fitting
+- **[[Chapter 2 - Multivariate and Regression|Chapter 2]]**：[[Chapter 2 - Multivariate and Regression#3. Covariance Matrix — Portfolio Risk 的核心|Covariance matrix]]、[[Chapter 2 - Multivariate and Regression#2.2 Spearman (Rank) Correlation|Pearson vs Spearman]] → Copula fitting 中 Spearman 的选择；[[Chapter 2 - Multivariate and Regression#6. Regression（回归分析）|Regression]] → model-based simulation 的基础
+- **[[Chapter 3 - Financial Data & Monte Carlo Simulation|Chapter 3]]**：[[Chapter 3 - Financial Data & Monte Carlo Simulation#4. Cholesky Factorization（如何求 $L$）|Cholesky decomposition]]、[[Chapter 3 - Financial Data & Monte Carlo Simulation#1. 为什么需要 Monte Carlo？|Monte Carlo]] → Copula simulation 的核心引擎
+- **[[Chapter 4 - Value-at-Risk (VaR)|Chapter 4]]**：[[Chapter 4 - Value-at-Risk (VaR)#3. VaR 的计算方法（三大方法）|VaR 的三种计算方法]] → 本章深化为 model-based 和 copula-based simulation；[[Chapter 4 - Value-at-Risk (VaR)#6. Expected Shortfall (ES) — VaR 的补充|ES 作为 VaR 的补充]] → 本章给出完整推导和 [[Chapter 4 - Value-at-Risk (VaR)#7. VaR 的性质：Coherent Risk Measures|coherent risk measure]] 的理论支撑
